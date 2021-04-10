@@ -32,9 +32,9 @@ fn main() -> Result<()> {
         let lon = parse!("longitude");
         let ele = parse!("elevation");
         let course = parse!("course");
-        let _dunno1 = fields.next();
-        let _dunno2 = fields.next();
         let speed = parse!("speed");
+        let _dunno1 = fields.next(); // horizontal accuracy in meters?
+        let _dunno2 = fields.next(); // vertical accuracy in meters?
         
         points.push(gpx::Point {
             time: FixedOffset::west(0).timestamp(
