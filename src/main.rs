@@ -5,8 +5,22 @@ use std::io::BufRead;
 
 mod gpx;
 
+fn usage() -> ! {
+    eprintln!("usage: {} file.slopes", std::env::args().next().unwrap());
+    eprintln!("converts a Slopes export file into GPX on stdout");
+    std::process::exit(1);
+}
+
 fn main() -> Result<()> {
-    let path = std::env::args().nth(1).expect("need a file path");
+    let path = match std::env::args().nth(1) {
+        None => usage(),
+        Some(path) => {
+            if path == "--help" || path == "-h" {
+                usage();
+            }
+            path
+        }
+    };
     let file = File::open(path).context("failed to open file")?;
     let mut z = zip::ZipArchive::new(file).context("failed to read zip file")?;
 
