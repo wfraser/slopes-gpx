@@ -13,7 +13,7 @@ pub struct Point {
 
 pub fn write_gpx(mut w: impl Write, segments: &[&[Point]]) -> io::Result<()> {
     writeln!(w, r#"<?xml version="1.0" encoding="utf-8"?>
-<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="wfraser/arz/1">"#)?;
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="wfraser/slopes-gpx/1">"#)?;
     for &seg in segments {
         writeln!(w, "<trk><trkseg>")?;
         for point in seg {
